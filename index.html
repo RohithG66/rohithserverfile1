@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MoodTunes 🎵</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      padding: 40px 30px;
+      border-radius: 20px;
+      max-width: 800px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(0,0,0,0.2);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+    }
+
+    .mood-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .mood-buttons button {
+      padding: 12px 25px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #ffecd2, #fcb69f);
+      color: #333;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease, background 0.3s;
+    }
+
+    .mood-buttons button:hover {
+      transform: scale(1.05);
+      background: linear-gradient(135deg, #fcb69f, #ffecd2);
+    }
+
+    .recommendations {
+      text-align: left;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 100%;
+      overflow-x: auto;
+    }
+
+    .recommendations h2 {
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+    }
+
+    .recommendations p {
+      margin: 10px 0;
+      font-size: 1rem;
+    }
+
+    a {
+      color: #ffd700;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .mood-buttons button {
+        font-size: 0.9rem;
+        padding: 10px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎧 MoodTunes</h1>
+    <p>Select your current mood and vibe with handpicked songs 🎶</p>
+
+    <div class="mood-buttons">
+      <button onclick="showSongs('happy')">😊 Happy</button>
+      <button onclick="showSongs('sad')">😢 Sad</button>
+      <button onclick="showSongs('energetic')">⚡ Energetic</button>
+      <button onclick="showSongs('romantic')">❤️ Romantic</button>
+    </div>
+
+    <div id="recommendations" class="recommendations"></div>
+  </div>
+
+  <script>
+    const songs = {
+      happy: [
+        { title: "Happy – Pharrell Williams", link: "https://www.youtube.com/watch?v=ZbZSe6N_BXs" },
+        { title: "Can't Stop the Feeling – Justin Timberlake", link: "https://www.youtube.com/watch?v=ru0K8uYEZWw" }
+      ],
+      sad: [
+        { title: "Let Her Go – Passenger", link: "https://www.youtube.com/watch?v=RBumgq5yVrA" },
+        { title: "Someone Like You – Adele", link: "https://www.youtube.com/watch?v=hLQl3WQQoQ0" }
+      ],
+      energetic: [
+        { title: "Eye of the Tiger – Survivor", link: "https://www.youtube.com/watch?v=btPJPFnesV4" },
+        { title: "Power – Kanye West", link: "https://www.youtube.com/watch?v=L53gjP-TtGE" }
+      ],
+      romantic: [
+        { title: "Perfect – Ed Sheeran", link: "https://www.youtube.com/watch?v=2Vv-BfVoq4g" },
+        { title: "All of Me – John Legend", link: "https://www.youtube.com/watch?v=450p7goxZqg" }
+      ]
+    };
+
+    function showSongs(mood) {
+      const list = songs[mood];
+      const container = document.getElementById('recommendations');
+      container.innerHTML = `<h2>🎵 ${capitalize(mood)} Playlist</h2>`;
+      list.forEach(song => {
+        const songItem = document.createElement('p');
+        songItem.innerHTML = `🎧 <a href="${song.link}" target="_blank">${song.title}</a>`;
+        container.appendChild(songItem);
+      });
+    }
+
+    function capitalize(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+  </script>
+</body>
+</html>
